@@ -34,7 +34,7 @@
   /* text */
   #line { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.35rem, 5.2vw, 2rem); line-height: 1.45; max-width: 520px; min-height: 9.5rem; display: flex; align-items: center; justify-content: center; transition: opacity .9s; }
   #line.fade { opacity: 0; }
-  #line strong { font-weight: 700; }
+  #line strong { font-weight: 700; display: block; margin-top: .6rem; }
   .hint { opacity: .6; font-size: .95rem; }
   .btn-soft { border: 1px solid rgba(246,231,210,.45); color: var(--paper); background: transparent; padding: .6rem 1.9rem; font-weight: 500; transition: .3s; }
   .btn-soft:hover, .btn-soft:active { background: var(--paper); color: var(--night); }
@@ -67,13 +67,13 @@ const CONFIG = {
   name: "Vania",
   from: "Qolby",
   lines: [
-    "Hai vania, waktu itu kamu bilang kamu nggak mau di rayain ulang tahunnya, jadi aku ngga ngerayain, cuman aku mau kasih surprise dari website kecil ini yang aku buat untuk kamu hehe",
+    "Hai vania, waktu itu kamu bilang kamu nggak mau di rayain ulang tahunnya, jadi aku ngga ngerayain, tapi aku mau kasih surprise dari website kecil ini yang aku buat untuk kamu hehe",
     "kita udah temenan hampir 3 tahun, gila sih berawal dari ketemu di roblox terus main phasmophobia sampe server nya penuh dengan orang orang aneh terus mati lagi servernya wkwkkw",
     "banyak banget drama kita dari orang paling deket atau drama di server yang gajelas banget jir arahnya",
     "aku mau bilang makasih yah van udah nemenin aku vc biar ada temen ngobrol, curhat, atau bahkan liatin aku main game game aneh.",
     "kemaren pas kamu bilang tahun depan mau ke tangerang aku seneng van, senengg banget karna salah satu wishlist ku adalah ketemu kamu, so pls jadikan yah mweheheh.",
     "t-t-tapi jangan bilang bilang yah soal ini kesiapapun! A-awas aja ya kalo bilang bilang soal ini Hmph!",
-    "at last, i don't want to lose our friendship vania, you're matters to me, more than anything you can imagine **please stay with me** :)"
+    "at last, i don't want to lose our friendship vania, you're matters to me, more than anything you could imagine. \n**please stay with me** :)"
   ],
   closing: "I love you sis vania, i adore you the most.\nFrom Qolby."
 };
@@ -101,7 +101,13 @@ function fadeTo(target, ms) {
 
 function say(text, after) {
   line.classList.add('fade');
-  setTimeout(() => { line.innerHTML = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); line.style.whiteSpace = 'pre-line'; line.classList.remove('fade'); if (after) after(); }, 900);
+  setTimeout(() => {
+    const html = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    line.innerHTML = '<span>' + html + '</span>';
+    line.style.whiteSpace = 'pre-line';
+    line.classList.remove('fade');
+    if (after) after();
+  }, 900);
 }
 
 // drifting lights
